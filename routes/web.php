@@ -12,5 +12,25 @@
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return redirect()->route('login');
+})->name('home');
+
+
+Route::get('login', 'AuthController@getLogin')->name('login');
+Route::post('login', 'AuthController@doLogin')->name('do_login');
+Route::get('logout', 'AuthController@logout')->name('logout');
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('/', 'AdminController@index')->name('admin_dash');
+    Route::get('create-lecturer', 'AdminController@create')->name('create_lecturer');
 });
+
+Route::group(['prefix' => 'lecturer'], function () {
+    Route::get('/', 'LecturerController@index')->name('lecturer_dash');
+});
+
+Route::group(['prefix' => 'student'], function () {
+    Route::get('/', 'StudentController@index')->name('student_dash');
+});
+
+

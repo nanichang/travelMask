@@ -177,6 +177,10 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+ 				App\Providers\StudentServiceProvider::class,
+ 				App\Providers\LecturerServiceProvider::class,
+ 		App\Providers\AdminServiceProvider::class,
+ 				
         
         Collective\Html\HtmlServiceProvider::class,
         Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
