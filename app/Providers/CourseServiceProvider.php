@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class AminServiceProvider extends ServiceProvider
+class CourseServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -23,7 +23,7 @@ class AminServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('App\Repositories\Amin\AminContract',
-            'App\Repositories\Amin\EloquentAminRepository');
+        $this->app->bind('App\Repositories\Course\CourseContract',
+            'App\Repositories\Course\EloquentCourseRepository');
     }
 }

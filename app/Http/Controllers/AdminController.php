@@ -4,6 +4,7 @@
 
 	use Illuminate\Http\Request;
 	use App\Repositories\Admin\AdminContract;
+	use Sentinel;
 
 	class AdminController extends Controller
 	{
@@ -19,10 +20,11 @@
 	     *
 	     * @return \Illuminate\Http\Response
 	     */
-	    public function index()
-	    {
-	        //
-	        return view('admin.index');
+	    public function index() {
+	        
+        	
+        	// $users = $this->repo->findAll();
+        	return view('admin.index');
 	    }
 
 	    /**
@@ -41,11 +43,39 @@
 	     * @param  \Illuminate\Http\Request  $request
 	     * @return \Illuminate\Http\Response
 	     */
-	    public function store(Request $request)
-	    {
-	        //
-	    }
+	    public function store(Request $request) {
+	    	// dd($request->all());
+	    	
+	    	$this->validate($request, [
+            	'first_name' => 'required',
+            	'last_name' => 'required',
+            	'email' => 'required',
+            	'phone_number' => 'required'
+        	]);
 
+        	try {
+            	$admin = $this->repo->create($request);
+        		
+            	if ($admin->id) {
+             
+            		return redirect()->back()
+                	->with('success', 'Lecturer successfully added');
+            	} else {
+                	return back()
+                    ->withInput()
+                    ->with('error', 'Could not add Lecturer. Try again!');
+            	}
+        	
+        		
+        	} catch (QueryException $e) {
+            	if ($e->errorInfo[1] == 1062) {
+                	return back()
+                    ->withInput()
+                    ->with('error', 'User exists!');
+            	}
+        	}
+	    }
+	   
 	    /**
 	     * Display the specified resource.
 	     *

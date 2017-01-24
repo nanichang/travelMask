@@ -4,10 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Lecturer extends Model
+class Course extends Model
 {
-    public function course(){
-        return $this->hasMany('App\Course');
+    public function lecturer() {
+        return $this->belongsTo('App\Lecturer');
+        
     }
     
     public function student() {

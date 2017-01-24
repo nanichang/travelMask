@@ -15,7 +15,7 @@ class AuthController extends Controller
         return view('auth.login');
     }
     
-    public function doLogin(Request $request) {
+    public function postLogin(Request $request) {
         
         $this->validate($request, [
            'email'  => 'required|email',
@@ -30,21 +30,25 @@ class AuthController extends Controller
         $user = Sentinel::authenticate($credentials);
         
         if(!Sentinel::authenticate($credentials)) {
-            // return redirect()->back()->withInput()->with('error', 'Your Login Credentials didn\'t match');
-            echo "fail to Authenticate user";
+            return redirect()->back()->withInput()->with('error', 'Your Login Credentials did not match');
         }else{
-            Sentinel::login($user);
-            
+                
+                Sentinel::login($user);
+                session(['currentUser' => $user]);
+                
             try {
+                
                 if (Sentinel::getUser()->inRole('admin')) {
                     session(['currentUserRole' => 'admin']);
                     session(['currentUserId' => $user->id]);
                     return redirect()->route('admin_dash');
-                    // return view('layouts.main');
+                    
                 }
+                
                 else if (Sentinel::getUser()->inRole('lecturer')) {
                     session(['currentUserRole' => 'lecturer']);
                     session(['currentUserId' => $user->id]);
+                    // dd($user);
                     return redirect()->route('lecturer_dash');
                     // echo "hello Lect";
                 }
