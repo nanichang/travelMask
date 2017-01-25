@@ -105,7 +105,7 @@
                 </li>
     
                 <li>
-                    <a href="charts.html">
+                    <a href="{{ route('student_registration') }}">
                         <i class="pe-7s-graph1"></i>
                         <p>view Courses</p>
                     </a>

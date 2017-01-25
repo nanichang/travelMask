@@ -31,6 +31,10 @@ class EloquentStudentRepository implements StudentContract
         return DB::table('students')->get();
     }
     
+    public function findById($studentid) {
+        return Sentinel::findById(17);
+    }
+    
     public function remove($userId) {
         $user = Sentinel::findById($userId);
         $user->delete();

@@ -55,10 +55,13 @@
 				
 			];
 			
-			$student = Sentinel::register($adminDetails, true);
+			$student = Sentinel::register($adminDetails);
+			// dd($student);
 			$sentinelUser = Sentinel::findById($student->id);
+		
 			
 			$activation = Activation::create($student);
+			// dd($activation);
 			$role = Sentinel::findRoleBySlug('student');
 			$role->users()->attach($student);
 			$this->sendEmail($student, $activation->code);
@@ -71,9 +74,9 @@
 			$student = Student::whereEmail($email)->first();
 			$sentinelUser = Sentinel::findById($student->id);
 			if(Activation::complete($sentinelUser, $activationCode)) {
-				return redirect()->route('student_update');
+				return redirect()->route('home');
 			}else {
-				// return redirect()->back();
+				return redirect()->route('home');
 			}
 		}
 		
@@ -83,9 +86,27 @@
 				'code' => $code
 			], function($message) use ($student) {
 				$message->to($student->email);
-				$message->subject("Hello $student->first_name, activate your account");
+				$message->subject("Activate your LMS Account");
 			});
 		}
+		
+		public function studentRegistation(){
+			
+			// $student = $this->repo->findById($studentid);
+			// if(!$student) {
+			// 	return redirect()->route('home');
+			// }
+			
+			return view('student.register');
+			// , ['student' => $student]);
+			
+		}
+		
+		
+		public function getFaculty($id) {
+	        return view('student.register', ['student' => User::find($email), 
+	        'data' => Department::where('faculty_id', $id)->with('faculty')->get()]); 
+	    }
 	    
 	    
 
