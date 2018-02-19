@@ -185,6 +185,7 @@ return [
         
         Collective\Html\HtmlServiceProvider::class,
         Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
+        KingFlamez\Rave\RaveServiceProvider::class,
 
     ],
 
@@ -240,6 +241,8 @@ return [
         'Activation' => Cartalyst\Sentinel\Laravel\Facades\Activation::class,
         'Reminder'   => Cartalyst\Sentinel\Laravel\Facades\Reminder::class,
         'Sentinel'   => Cartalyst\Sentinel\Laravel\Facades\Sentinel::class,
+
+        'Rave' => KingFlamez\Rave\Facades\Rave::class,
 
     ],
 
