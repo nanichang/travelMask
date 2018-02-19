@@ -31,29 +31,25 @@ class AuthController extends Controller
         
         if(!Sentinel::authenticate($credentials)) {
             return redirect()->back()->withInput()->with('error', 'Your Login Credentials did not match');
-        }else{
-                
+        }else{                
                 Sentinel::login($user);
                 session(['currentUser' => $user]);
                 
             try {
                 
-                if (Sentinel::getUser()->inRole('admin')) {
-                    session(['currentUserRole' => 'admin']);
+                if (Sentinel::getUser()->inRole('superadmin')) {
+                    session(['currentUserRole' => 'superadmin']);
                     session(['currentUserId' => $user->id]);
                     return redirect()->route('admin_dash');
                     
-                }
-                
-                else if (Sentinel::getUser()->inRole('lecturer')) {
-                    session(['currentUserRole' => 'lecturer']);
+                } else if (Sentinel::getUser()->inRole('admin')) {
+                    session(['currentUserRole' => 'admin']);
                     session(['currentUserId' => $user->id]);
                     // dd($user);
                     return redirect()->route('lecturer_dash');
                     // echo "hello Lect";
-                }
-                else if (Sentinel::getUser()->inRole('student')) {
-                    session(['currentUserRole' => 'student']);
+                } else if (Sentinel::getUser()->inRole('users')) {
+                    session(['currentUserRole' => 'users']);
                     session(['currentUserId' => $user->id]);
                     return redirect()->route('student_dash');
                     // echo "student";

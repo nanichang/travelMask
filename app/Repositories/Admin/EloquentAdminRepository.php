@@ -19,7 +19,7 @@ class EloquentAdminRepository implements AdminContract
         ];
         
         $admin = Sentinel::registerAndActivate($request->all(), true);
-        $role = Sentinel::findRoleBySlug('lecturer');
+        $role = Sentinel::findRoleBySlug('admin');
         $role->users()->attach($admin);
         return $admin;
     }

@@ -4,7 +4,7 @@
 ### Package(s)
 
 	- [Cartalyst Sentinel](https://cartalyst.com/manual/sentinel/2.0)
-	- [Cartal Sentinel](https://cartalyst.com/manual/sentinel/2.0)
+	- [Laravel Collective](https://cartalyst.com/manual/sentinel/2.0)
 
 
 ## Contributors

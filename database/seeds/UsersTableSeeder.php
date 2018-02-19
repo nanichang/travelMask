@@ -22,39 +22,39 @@ class UsersTableSeeder extends Seeder
             'first_name' => 'Nani',
             'last_name' => 'admin',
             'phone_number' => '1234567890',
-            'email' => 'admin@lms.com',
+            'email' => 'admin@admin.com',
             'password' => 'secret',
             
         ];
         
         $admin = Sentinel::registerAndActivate($adminDetails, true);
-        $role = Sentinel::findRoleBySlug('admin');
+        $role = Sentinel::findRoleBySlug('superadmin');
         $role->users()->attach($admin);
         
         $lecturerDetails = [
-            'first_name' => 'Nani',
-            'last_name' => 'Lecturer',
+            'first_name' => 'Ohsie',
+            'last_name' => 'Ohsie',
             'phone_number' => '1234567890',
-            'email' => 'lecturer@lms.com',
+            'email' => 'Ohsie@admin.com',
             'password' => 'secret',
             
         ];
         
         $lecturer = Sentinel::registerAndActivate($lecturerDetails, true);
-        $role = Sentinel::findRoleBySlug('lecturer');
+        $role = Sentinel::findRoleBySlug('admin');
         $role->users()->attach($lecturer);
         
         $studentDetails = [
-            'first_name' => 'Nani',
-            'last_name' => 'Student',
+            'first_name' => 'Victor',
+            'last_name' => 'Smilez',
             'phone_number' => '1234567890',
-            'email' => 'student@lms.com',
+            'email' => 'victor@admin.com',
             'password' => 'secret',
             
         ];
         
         $student = Sentinel::registerAndActivate($studentDetails, true);
-        $role = Sentinel::findRoleBySlug('student');
+        $role = Sentinel::findRoleBySlug('users');
         $role->users()->attach($student);
         
         
